@@ -1,6 +1,6 @@
 # Heroku for Windows users
 ###### who want to be Linux users
-### Description
+## Description
 Skeleton docker/rails application for use with Pragmatic Studios ***Flix*** exercise
 
 
