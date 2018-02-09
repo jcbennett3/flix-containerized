@@ -13,8 +13,8 @@ Skeleton docker/rails application for use with Pragmatic Studios ***Flix*** exer
 * (docker-compose)[https://docs.docker.com/compose/install/]
 
 ## Instructions
-*  Create a file within your app's root directory named ***Dockerfile*** (no file extension, just "Dockerfile")
-*  Copy the following into your dockerfile and save.
+>Create a file within your app's root directory named ***Dockerfile*** (no file extension, just "Dockerfile")
+>Copy the following into your dockerfile and save.
 ```sh
 FROM ruby:2.3.3
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
@@ -25,10 +25,10 @@ COPY Gemfile.lock /<your app name>/Gemfile.lock
 RUN bundle install
 COPY . /<your app name>
 ```
-* From within ${your_app}/config, find and rename ***database.yml*** to ***old_database.yml***
-*  Create a new file of the same name, in the same location. Save both files for now.
-*  Within your application's root directory, create a file named ***docker-compose.yml***
-*  Copy the following into ***docker-compose.yml*** and save.
+>From within ${your_app}/config, find and rename ***database.yml*** to ***old_database.yml***
+>Create a new file of the same name, in the same location. Save both files for now.
+>Within your application's root directory, create a file named ***docker-compose.yml***
+>Copy the following into ***docker-compose.yml*** and save.
 ```yaml
 version: '3'
 services:
@@ -44,11 +44,11 @@ services:
     depends_on:
       - db
 ```
-*  From your command line, run
+>From your command line, run
   ```sh
   docker-compose up --build
   ```
-  * At this point you should see something similar to the following:
+ >At this point you should see something similar to the following:
   ```sh
   Starting rails_db_1 ...
 Starting rails_db_1 ... done
@@ -69,13 +69,32 @@ web_1  | * Environment: development
 web_1  | * Listening on tcp://0.0.0.0:3000
 web_1  | Use Ctrl-C to stop
   ```
-* :exclamation: In a separate terminal :exclamation: run:
+>:exclamation: In a separate terminal :exclamation: run:
 ```sh
 docker-compose run web rails db:create
 ```
-* You should then see something like this:
+>You should then see something like this:
 ```sh
 Starting rails_db_1 ... done
 Created database 'flix_development'
 Created database 'flix_test'
 ```
+
+>From here, stop your server.  To do this, run:
+```sh
+    docker-compose down
+```
+>from your original terminal.
+>You *can* just ```ctrl-c`` to exit, as usual, but this is known to cause the error:
+```sh
+web_1 | A server is already
+running. Check /flix/tmp/pids/server.pid.
+```
+>when attempting to restart your server.  If that's the case, just remove the aforementioned pid file and you're on your way.
+
+# Restarting your application
+```docker-compose up```
+>from within your project's root directory (i.e. make sure you can see your dockerfile when checking your directory)
+>In another terminal, run ```docker-compose run web rails db:create```
+---
+>At this point, you should be able to view your application in the browser, just as if you were running it without docker.
