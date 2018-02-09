@@ -44,6 +44,25 @@ services:
     depends_on:
       - db
 ```
+>Open your new ***database.yml*** file, and, after replacing <your app name> with your application's name in both locations, save it with the following contents:
+```sh
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password:
+  pool: 5
+
+development:
+  <<: *default
+  database: <your app name>_development
+
+
+test:
+  <<: *default
+  database: <your app name>_test
+```
 >From your command line, run
   ```sh
   docker-compose up --build
