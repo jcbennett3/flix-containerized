@@ -104,7 +104,7 @@ Created database 'flix_test'
     docker-compose down
 ```
 >from your original terminal.
->You *can* just ```ctrl-c`` to exit, as usual, but this is known to cause the error:
+>You *can* just `ctrl-c` to exit, as usual, but this is known to cause the error:
 ```sh
 web_1 | A server is already
 running. Check /flix/tmp/pids/server.pid.
